@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CEO</title>
+  <script type='text/javascript' src='lib/jquery-3.1.1.min.js'></script>
+  <style>
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+    .Background {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+/*      background: url('assets/background_transparent.png') no-repeat center;
+      background-size: cover;
+*/    }
+    .Overground {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: url('assets/background_transparent.png') no-repeat center;
+      background-size: cover;
+      pointer-events: none;
+    }
+    #film, #music, #music_video {
+      position: absolute;
+    }
+    video {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      object-fit: cover;
+      transform: scale(.8, 1);
+    }
+    .video_container:hover > .standard {
+      display: none;
+    }
+    .video_container:hover > .hover {
+      display: block;
+    }
+    .hover {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class='Background'>
+
+    <div class='test'>
+      Hello World
+    </div>
+
+    <div id='film' class='video_container'>
+      <video autoplay loop class='standard'>
+        <source src='assets/TV_VIDEOS/Film_1.mp4' type='video/mp4'>
+      </video>
+      <video autoplay loop class='hover'>
+        <source src='assets/TV_VIDEOS/Film_2.mp4' type='video/mp4'>
+      </video>
+    </div>
+
+    <div id='music' class='video_container'>
+      <video autoplay loop class='standard'>
+        <source src='assets/TV_VIDEOS/Music_1.mp4' type='video/mp4'>
+      </video>
+      <video autoplay loop class='hover'>
+        <source src='assets/TV_VIDEOS/Music_2.mp4' type='video/mp4'>
+      </video>
+    </div>
+
+    <div id='music_video' class='video_container'>
+      <video autoplay loop class='standard'>
+        <source src='assets/TV_VIDEOS/MV_1.mp4' type='video/mp4'>
+      </video>
+      <video autoplay loop class='hover'>
+        <source src='assets/TV_VIDEOS/MV_2.mp4' type='video/mp4'>
+      </video>
+    </div>
+
+    <div class='Overground'/>
+
+  </div>
+</body>
+<script>
+
+var image = { width: 3620, height: 2036 };
+var targets = {};
+
+$(document).ready(function() {
+  targets = {
+    film: { x: 262, y: 1237, width: 222, height: 191, element: $('#film') },
+    music: { x: 1223, y: 1131, width: 171, height: 149, element: $('#music') },
+    music_video: { x: 2207, y: 680, width: 265, height: 217, element: $('#music_video') },
+  };
+  updateTargets();
+});
+$(window).resize(updateTargets);
+
+function updateTargets() {
+    var windowWidth = $(window).width();
+    var windowHeight = $(window).height();
+
+    // Get largest dimension increase
+    var xScale = windowWidth / image.width;
+    var yScale = windowHeight / image.height;
+    var scale;
+    var yOffset = 0;
+    var xOffset = 0;
+
+    if (xScale > yScale) {
+        // The image fits perfectly in x axis, stretched in y
+        scale = xScale;
+        yOffset = (windowHeight - (image.height * scale)) / 2;
+    } else {
+        // The image fits perfectly in y axis, stretched in x
+        scale = yScale;
+        xOffset = (windowWidth - (image.width * scale)) / 2;
+    }
+
+    for (target_name in targets) {
+      var target = targets[target_name];
+      target.element.css('top', (target.y/* + target.height / 2*/) * scale + yOffset);
+      target.element.css('left', (target.x/* + target.width / 2*/) * scale + xOffset);
+      target.element.find('video').css('width', (target.width) * scale);
+      target.element.find('video').css('height', (target.height) * scale);
+    }
+}
+
+</script>
+</html>
