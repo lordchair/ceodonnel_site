@@ -18,9 +18,9 @@
       right: 0;
       width: 100%;
       height: 100%;
-/*      background: url('assets/background_transparent.png') no-repeat center;
-      background-size: cover;
-*/    }
+      /*background: url('assets/background_transparent.png') no-repeat center;*/
+      /*background-size: cover;*/
+    }
     .Overground {
       position: absolute;
       top: 0;
@@ -29,7 +29,9 @@
       right: 0;
       width: 100%;
       height: 100%;
-      background: url('assets/background_transparent.png') no-repeat center;
+      /*background: url('assets/background_wide.png') no-repeat center;*/
+      background-repeat: no-repeat;
+      background-position: center;
       background-size: cover;
       pointer-events: none;
     }
@@ -101,19 +103,62 @@
 var image = { width: 3620, height: 2036 };
 var targets = {};
 
+var images = {};
+
 $(document).ready(function() {
-  targets = {
-    film: { x: 262, y: 1237, width: 222, height: 191, element: $('#film') },
-    music: { x: 1223, y: 1131, width: 171, height: 149, element: $('#music') },
-    music_video: { x: 2207, y: 680, width: 265, height: 217, element: $('#music_video') },
+  images = {
+    wide: {
+      url: 'assets/background_wide.png',
+      width: 3620, height: 2036,
+      targets: {
+        film: { x: 262, y: 1237, width: 222, height: 191, element: $('#film') },
+        music: { x: 1223, y: 1131, width: 171, height: 149, element: $('#music') },
+        music_video: { x: 2207, y: 680, width: 265, height: 217, element: $('#music_video') },
+      }
+    },
+    square: {
+      url: 'assets/background_square.png',
+      width: 2094, height: 2094,
+      targets: {
+        film: { x: 94, y: 1396, width: 128, height: 162, element: $('#film') },
+        music: { x: 715, y: 1260, width: 120, height: 137, element: $('#music') },
+        music_video: { x: 1070, y: 914, width: 130, height: 170, element: $('#music_video') },
+      }
+    },
+    narrow: {
+      url: 'assets/background_narrow.png',
+      width: 750, height: 1334,
+      targets: {
+        film: { x: 43, y: 861, width: 100, height: 100, element: $('#film') },
+        music: { x: 392, y: 734, width: 100, height: 100, element: $('#music') },
+        music_video: { x: 492, y: 543, width: 100, height: 100, element: $('#music_video') },
+      }
+    },
   };
   updateTargets();
 });
 $(window).resize(updateTargets);
 
+function setBg(url) {
+  $('.Overground').css('background-image', 'url(' + url + ')');
+};
+
 function updateTargets() {
     var windowWidth = $(window).width();
     var windowHeight = $(window).height();
+
+    var ratio = windowWidth / windowHeight;
+
+    var image;
+    if (ratio < .94) {
+      image = images.narrow;
+    } else if (ratio < 1.5) {
+      image = images.square;
+    } else {
+      image = images.wide;
+    }
+    setBg(image.url);
+    var targets = image.targets;
 
     // Get largest dimension increase
     var xScale = windowWidth / image.width;
