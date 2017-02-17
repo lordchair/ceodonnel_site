@@ -18,10 +18,72 @@
       right: 0;
       width: 100%;
       height: 100%;
-      /*background: url('assets/background_transparent.png') no-repeat center;*/
-      /*background-size: cover;*/
+      overflow-x: hidden;
     }
-    .Overground {
+    #name {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 1rem;
+      text-transform: capitalize;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      font-style: italic;
+      text-align: right;
+    }
+    #film, #music, #music_video {
+      position: absolute;
+    }
+    #desk, #hand, #staircase {
+      position: absolute;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+    #desk {
+      width: 1142px;
+      height: 718px;
+      transform-origin: bottom left;
+      left: -1%;
+      bottom: 6%;
+      z-index: 103;
+    }
+    #desk div {
+      top: 31.197771588%;
+      bottom: 42.0612813%;
+      left: 19.264448336%;
+      right: 57.793345009%
+    }
+    #hand {
+      width: 749px;
+      height: 596px;
+      transform-origin: left;
+      left: 10%;
+      bottom: 14%;
+      z-index: 102;
+    }
+    #hand div {
+      top: 34.8993289%;
+      bottom: 39.9328859%;
+      left: 34.7129506%;
+      right: 42.1895861%
+    }
+    #staircase {
+      width: 2317px;
+      height: 1191px;
+      transform-origin: top right;
+      top: 10%;
+      right: 0;
+      z-index: 101;
+    }
+    #staircase div {
+      top: 6.769231%;
+      bottom: 75.782788%;
+      left: 39.188606%;
+      right: 49.560509%;
+    }
+    .gif {
       position: absolute;
       top: 0;
       bottom: 0;
@@ -29,28 +91,12 @@
       right: 0;
       width: 100%;
       height: 100%;
-      /*background: url('assets/background_wide.png') no-repeat center;*/
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      pointer-events: none;
+      /*object-fit: cover;*/
     }
-    #film, #music, #music_video {
-      position: absolute;
-    }
-    video {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      object-fit: cover;
-      transform: scale(.8, 1);
-    }
-    .video_container:hover > .standard {
+    .scene:hover .standard {
       display: none;
     }
-    .video_container:hover > .hover {
+    .scene:hover .hover {
       display: block;
     }
     .hover {
@@ -59,132 +105,115 @@
   </style>
 </head>
 <body>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <div class='Background'>
 
-    <div id='film' class='video_container'>
-      <video autoplay mute loop class='standard'>
-        <!-- <source src='assets/TV_VIDEOS/Film_1.mp4' type='video/mp4'> -->
-        <source src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Film_1.mp4?raw=true' type='video/mp4'>
-      </video>
-      <video autoplay mute loop class='hover'>
-        <!-- <source src='assets/TV_VIDEOS/Film_2.mp4' type='video/mp4'> -->
-        <source src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Film_2.mp4?raw=true' type='video/mp4'>
-      </video>
+    <div id='name'>
+      Clinton O'Donnell
     </div>
 
-    <div id='music' class='video_container'>
-      <video autoplay mute loop class='standard'>
-        <!-- <source src='assets/TV_VIDEOS/Music_1.mp4' type='video/mp4'> -->
-        <source src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Music_1.mp4?raw=true' type='video/mp4'>
-      </video>
-      <video autoplay mute loop class='hover'>
-        <!-- <source src='assets/TV_VIDEOS/Music_2.mp4' type='video/mp4'> -->
-        <source src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Music_2.mp4?raw=true' type='video/mp4'>
-      </video>
+    <div id='desk' class='scene'>
+      <div id='film' class='gif_container'>
+        <img class='gif standard' src='assets/TV_VIDEOS/Film_1.gif' />
+        <img class='gif hover' src='assets/TV_VIDEOS/Film_2.gif' />
+      </div>
     </div>
 
-    <div id='music_video' class='video_container'>
-      <video autoplay mute loop class='standard'>
-        <!-- <source src='assets/TV_VIDEOS/MV_1.mp4' type='video/mp4'> -->
-        <source src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/MV_1.mp4?raw=true' type='video/mp4'>
-      </video>
-      <video autoplay mute loop class='hover'>
-        <!-- <source src='assets/TV_VIDEOS/MV_2.mp4' type='video/mp4'> -->
-        <source src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/MV_2.mp4?raw=true' type='video/mp4'>
-      </video>
+    <div id='hand' class='scene'>
+      <div id='music' class='gif_container'>
+        <img class='gif standard' src='assets/TV_VIDEOS/Music_1.gif' />
+        <img class='gif hover' src='assets/TV_VIDEOS/Music_2.gif' />
+      </div>
     </div>
 
-    <div class='Overground'/>
+    <div id='staircase' class='scene'>
+      <div id='music_video' class='gif_container' >
+        <img class='gif standard' src='assets/TV_VIDEOS/MV_1.gif' />
+        <img class='gif hover' src='assets/TV_VIDEOS/MV_2.gif' />
+      </div>
+    </div>
 
   </div>
 </body>
 <script>
 
-var image = { width: 3620, height: 2036 };
-var targets = {};
-
 var images = {};
 
-$(document).ready(function() {
-  images = {
-    wide: {
-      url: 'assets/background_wide.png',
-      width: 3620, height: 2036,
-      targets: {
-        film: { x: 262, y: 1237, width: 222, height: 191, element: $('#film') },
-        music: { x: 1223, y: 1131, width: 171, height: 149, element: $('#music') },
-        music_video: { x: 2207, y: 680, width: 265, height: 217, element: $('#music_video') },
-      }
-    },
-    square: {
-      url: 'assets/background_square.png',
-      width: 2094, height: 2094,
-      targets: {
-        film: { x: 94, y: 1396, width: 128, height: 162, element: $('#film') },
-        music: { x: 715, y: 1260, width: 120, height: 137, element: $('#music') },
-        music_video: { x: 1070, y: 914, width: 130, height: 170, element: $('#music_video') },
-      }
-    },
-    narrow: {
-      url: 'assets/background_narrow.png',
-      width: 750, height: 1334,
-      targets: {
-        film: { x: 43, y: 861, width: 100, height: 100, element: $('#film') },
-        music: { x: 392, y: 734, width: 100, height: 100, element: $('#music') },
-        music_video: { x: 492, y: 543, width: 100, height: 100, element: $('#music_video') },
-      }
-    },
-  };
-  updateTargets();
-});
+$(document).ready(function() { init(); });
 $(window).resize(updateTargets);
 
-function setBg(url) {
-  $('.Overground').css('background-image', 'url(' + url + ')');
+function setBg(selector, url) {
+  $(selector).css('background-image', 'url(' + url + ')');
 };
 
-function updateTargets() {
-    var windowWidth = $(window).width();
-    var windowHeight = $(window).height();
-
-    var ratio = windowWidth / windowHeight;
-
-    var image;
-    if (ratio < .94) {
-      image = images.narrow;
-    } else if (ratio < 1.5) {
-      image = images.square;
-    } else {
-      image = images.wide;
-    }
-    setBg(image.url);
-    var targets = image.targets;
-
-    // Get largest dimension increase
-    var xScale = windowWidth / image.width;
-    var yScale = windowHeight / image.height;
-    var scale;
-    var yOffset = 0;
-    var xOffset = 0;
-
-    if (xScale > yScale) {
-        // The image fits perfectly in x axis, stretched in y
-        scale = xScale;
-        yOffset = (windowHeight - (image.height * scale)) / 2;
-    } else {
-        // The image fits perfectly in y axis, stretched in x
-        scale = yScale;
-        xOffset = (windowWidth - (image.width * scale)) / 2;
-    }
-
-    for (target_name in targets) {
-      var target = targets[target_name];
-      target.element.css('top', (target.y/* + target.height / 2*/) * scale + yOffset);
-      target.element.css('left', (target.x/* + target.width / 2*/) * scale + xOffset);
-      target.element.find('video').css('width', (target.width) * scale);
-      target.element.find('video').css('height', (target.height) * scale);
-    }
+function init() {
+  images = {
+    desk: {
+      url: 'assets/desk.png',
+      width: 1142, height: 718,
+      target: { x: 262, y: 224, width: 220, height: 192 },
+      element: $('#desk'),
+      transform: 'translateX(0)'
+    },
+    hand: {
+      url: 'assets/hand.png',
+      width: 749, height: 596,
+      target: { x: 260, y: 208, width: 173, height: 150 },
+      element: $('#hand'),
+      transform: 'translate(30%, 15%)'
+    },
+    stair: {
+      url: 'assets/staircase.png',
+      width: 2317, height: 1191,
+      target: { x: 908, y: 78, width: 263, height: 214 },
+      element: $('#staircase'),
+      transform: 'translateX(20%)'
+    },
+  }
+  for (image in images) {
+    var mymage = images[image];
+    mymage.element.css('background-image', 'url(' + mymage.url + ')');
+  }
+  updateTargets();
 }
+
+function updateTargets() {
+  for (imageKey in images) {
+    var image = images[imageKey];
+    var newScale = Math.min($(window).width() / 1000, .4);
+    image.element.css('transform', 'scale(' + newScale + ') ' + image.transform);
+  }
+}
+
+  // images = {
+  //   wide: {
+  //     url: 'assets/background_wide.png',
+  //     width: 3620, height: 2036,
+  //     targets: {
+  //       film: { x: 262, y: 1237, width: 222, height: 191, element: $('#film') },
+  //       music: { x: 1223, y: 1131, width: 171, height: 149, element: $('#music') },
+  //       music_video: { x: 2207, y: 680, width: 265, height: 217, element: $('#music_video') },
+  //     }
+  //   },
+  //   square: {
+  //     url: 'assets/background_square.png',
+  //     width: 2094, height: 2094,
+  //     targets: {
+  //       film: { x: 94, y: 1396, width: 128, height: 162, element: $('#film') },
+  //       music: { x: 715, y: 1260, width: 120, height: 137, element: $('#music') },
+  //       music_video: { x: 1070, y: 914, width: 130, height: 170, element: $('#music_video') },
+  //     }
+  //   },
+  //   narrow: {
+  //     url: 'assets/background_narrow.png',
+  //     width: 750, height: 1334,
+  //     targets: {
+  //       film: { x: 43, y: 861, width: 100, height: 100, element: $('#film') },
+  //       music: { x: 392, y: 734, width: 100, height: 100, element: $('#music') },
+  //       music_video: { x: 492, y: 543, width: 100, height: 100, element: $('#music_video') },
+  //     }
+  //   },
+  // };
 
 </script>
 </html>
