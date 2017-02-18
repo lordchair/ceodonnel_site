@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://annotorious.github.com/latest/annotorious.css" />
+    <script src=" http://annotorious.github.com/latest/annotorious.min.js"></script>
+    <script>
+    var openFile = function(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function(){
+            var dataURL = reader.result;
+            var output = document.getElementById('mainImage');
+            output.src = dataURL;
+            setTimeout(function(){
+                anno.reset();
+            }, 100);
+        };
+        reader.readAsDataURL(input.files[0]);
+    };
+
+    // prints
+    function showBoxes(){
+        var myNode = document.getElementById("myList");
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+        }
+
+        var annoList = anno.getAnnotations();
+        //if (annoList.length == 0) return;
+        // copy object (for safety)
+        annoList = JSON.parse(JSON.stringify(annoList));
+        var width = document.getElementById("mainImage").width;
+        var height = document.getElementById("mainImage").height;
+        // make all annotations have pixel coordinates
+        for (var ind = 0; ind < annoList.length; ind++){
+            var curAnno = annoList[ind];
+            var curGeom = curAnno.shapes[0].geometry;
+            var relativeGeometry = curAnno.shapes[0].geometry;
+            var absoluteGeometry = {};
+            // means not using pixel coordinates
+            if (relativeGeometry.height < 1 || relativeGeometry.width < 1){
+                absoluteGeometry.height = Math.round(relativeGeometry.height * height);
+                absoluteGeometry.width = Math.round(relativeGeometry.width * width);
+                absoluteGeometry.x = Math.round(relativeGeometry.x * width);
+                absoluteGeometry.y = Math.round(relativeGeometry.y * height);
+            }
+            var xminStr = String(absoluteGeometry.x);
+            var widthStr = String(absoluteGeometry.x + absoluteGeometry.width);
+            var yminStr = String(absoluteGeometry.y);
+            var heightStr = String(absoluteGeometry.y + absoluteGeometry.height);
+            var textStr = curAnno.text;
+            //console.log(curAnno);
+            //console.log(curGeom);
+            curAnno.shapes[0].units = "pixels";
+            var node = document.createElement("CODE");
+            var brNode = document.createElement("BR");
+            node.appendChild(document.createTextNode('\n' + textStr + " pixels: { x: " + xminStr + ", y: " + yminStr + ", width: " + widthStr + ", height: " + heightStr + ' }'));
+            node.appendChild(document.createElement('br'));
+            node.appendChild(document.createTextNode('\n' + textStr + ' percent: { top: ' + relativeGeometry.y * 100 + '%, left: ' + relativeGeometry.x * 100 + '%, bottom: ' + (1 - (relativeGeometry.y + relativeGeometry.height)) * 100 + '%, right: ' + (1 - (relativeGeometry.x + relativeGeometry.width)) * 100 + '%}'));
+            document.getElementById("myList").appendChild(node);
+            document.getElementById("myList").appendChild(brNode);
+        }
+
+    }
+    </script>
+    <meta charset=utf-8 />
+    <title>JS Bin</title>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <style>
+        article, aside, figure, footer, header, hgroup,
+        menu, nav, section { display: block; }
+    </style>
+</head>
+<body>
+<a href="index.html">Back to home</a>
+<br>
+    <input type='file' accept='image/*' onchange='openFile(event)' />
+    <div>
+        <button type="button" onclick="showBoxes()">Show boxes</button>
+    </div>
+    <br>
+
+        <div>Select image, click and drag to select boxes, then click on 'Show Boxes' button.  The coordinates and the labels of the selected boxes will be shown. Format: (name, xmin, ymin, xmax, ymax)</div>
+        <ul id="myList">
+        </ul>
+    </br>
+    <div >
+        <img class="annotatable" id="mainImage" src="#" alt="your image" />
+    </div>
+
+</body>
+</html>

@@ -4,104 +4,9 @@
   <meta charset="utf-8">
   <title>CEO</title>
   <script type='text/javascript' src='lib/jquery-3.1.1.min.js'></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
   <style>
-    body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-    }
-    .Background {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      overflow-x: hidden;
-    }
-    #name {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 1rem;
-      text-transform: capitalize;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 1rem;
-      font-weight: 300;
-      font-style: italic;
-      text-align: right;
-    }
-    #film, #music, #music_video {
-      position: absolute;
-    }
-    #desk, #hand, #staircase {
-      position: absolute;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-    }
-    #desk {
-      width: 1142px;
-      height: 718px;
-      transform-origin: bottom left;
-      left: -1%;
-      bottom: 6%;
-      z-index: 103;
-    }
-    #desk div {
-      top: 31.197771588%;
-      bottom: 42.0612813%;
-      left: 19.264448336%;
-      right: 57.793345009%
-    }
-    #hand {
-      width: 749px;
-      height: 596px;
-      transform-origin: left;
-      left: 10%;
-      bottom: 14%;
-      z-index: 102;
-    }
-    #hand div {
-      top: 34.8993289%;
-      bottom: 39.9328859%;
-      left: 34.7129506%;
-      right: 42.1895861%
-    }
-    #staircase {
-      width: 2317px;
-      height: 1191px;
-      transform-origin: top right;
-      top: 10%;
-      right: 0;
-      z-index: 101;
-    }
-    #staircase div {
-      top: 6.769231%;
-      bottom: 75.782788%;
-      left: 39.188606%;
-      right: 49.560509%;
-    }
-    .gif {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      /*object-fit: cover;*/
-    }
-    .scene:hover .standard {
-      display: none;
-    }
-    .scene:hover .hover {
-      display: block;
-    }
-    .hover {
-      display: none;
-    }
+
   </style>
 </head>
 <body>
@@ -119,14 +24,18 @@
         <img class='gif standard' src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Film_1.gif?raw=true' />
         <img class='gif hover' src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Film_2.gif?raw=true' />
       </div>
+      <div class='bg'></div>
     </div>
 
-    <div id='hand' class='scene'>
-      <div id='music' class='gif_container'>
-        <!-- <img class='gif standard' src='assets/TV_VIDEOS/Music_1.gif?raw=true' /> -->
-        <!-- <img class='gif hover' src='assets/TV_VIDEOS/Music_2.gif?raw=true' /> -->
-        <img class='gif standard' src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Music_1.gif?raw=true' />
-        <img class='gif hover' src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Music_2.gif?raw=true' />
+    <div class='centerer'>
+      <div id='hand' class='scene'>
+        <div id='music' class='gif_container'>
+          <!-- <img class='gif standard' src='assets/TV_VIDEOS/Music_1.gif?raw=true' /> -->
+          <!-- <img class='gif hover' src='assets/TV_VIDEOS/Music_2.gif?raw=true' /> -->
+          <img class='gif standard' src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Music_1.gif?raw=true' />
+          <img class='gif hover' src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/Music_2.gif?raw=true' />
+        </div>
+        <div class='bg'></div>
       </div>
     </div>
 
@@ -137,89 +46,10 @@
         <img class='gif standard' src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/MV_1.gif?raw=true' />
         <img class='gif hover' src='https://github.com/lordchair/ceodonnel_site/blob/master/assets/TV_Videos/MV_2.gif?raw=true' />
       </div>
+      <div class='bg'></div>
     </div>
 
   </div>
 </body>
-<script>
-
-var images = {};
-
-$(document).ready(function() { init(); });
-$(window).resize(updateTargets);
-
-function setBg(selector, url) {
-  $(selector).css('background-image', 'url(' + url + ')');
-};
-
-function init() {
-  images = {
-    desk: {
-      url: 'assets/desk.png',
-      width: 1142, height: 718,
-      target: { x: 262, y: 224, width: 220, height: 192 },
-      element: $('#desk'),
-      transform: 'translateX(0)'
-    },
-    hand: {
-      url: 'assets/hand.png',
-      width: 749, height: 596,
-      target: { x: 260, y: 208, width: 173, height: 150 },
-      element: $('#hand'),
-      transform: 'translate(30%, 15%)'
-    },
-    stair: {
-      url: 'assets/staircase.png',
-      width: 2317, height: 1191,
-      target: { x: 908, y: 78, width: 263, height: 214 },
-      element: $('#staircase'),
-      transform: 'translateX(20%)'
-    },
-  }
-  for (image in images) {
-    var mymage = images[image];
-    mymage.element.css('background-image', 'url(' + mymage.url + ')');
-  }
-  updateTargets();
-}
-
-function updateTargets() {
-  for (imageKey in images) {
-    var image = images[imageKey];
-    var newScale = Math.min($(window).width() / 1000, .4);
-    image.element.css('transform', 'scale(' + newScale + ') ' + image.transform);
-  }
-}
-
-  // images = {
-  //   wide: {
-  //     url: 'assets/background_wide.png',
-  //     width: 3620, height: 2036,
-  //     targets: {
-  //       film: { x: 262, y: 1237, width: 222, height: 191, element: $('#film') },
-  //       music: { x: 1223, y: 1131, width: 171, height: 149, element: $('#music') },
-  //       music_video: { x: 2207, y: 680, width: 265, height: 217, element: $('#music_video') },
-  //     }
-  //   },
-  //   square: {
-  //     url: 'assets/background_square.png',
-  //     width: 2094, height: 2094,
-  //     targets: {
-  //       film: { x: 94, y: 1396, width: 128, height: 162, element: $('#film') },
-  //       music: { x: 715, y: 1260, width: 120, height: 137, element: $('#music') },
-  //       music_video: { x: 1070, y: 914, width: 130, height: 170, element: $('#music_video') },
-  //     }
-  //   },
-  //   narrow: {
-  //     url: 'assets/background_narrow.png',
-  //     width: 750, height: 1334,
-  //     targets: {
-  //       film: { x: 43, y: 861, width: 100, height: 100, element: $('#film') },
-  //       music: { x: 392, y: 734, width: 100, height: 100, element: $('#music') },
-  //       music_video: { x: 492, y: 543, width: 100, height: 100, element: $('#music_video') },
-  //     }
-  //   },
-  // };
-
-</script>
+<script type='text/javascript' src='index.js'></script>
 </html>
