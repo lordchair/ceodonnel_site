@@ -69,6 +69,10 @@ body {
   right: 31.27%;
 }
 
+.scene, .centerer {
+  pointer-events: none;
+}
+
 #staircase {
   width: 2014px;
   height:946px;
@@ -86,7 +90,9 @@ body {
 }
 
 .gif {
+  pointer-events: all;
   position: absolute;
+  background-color: black;
   top: 0;
   bottom: 0;
   left: 0;

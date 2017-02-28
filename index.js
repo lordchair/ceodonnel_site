@@ -1,4 +1,9 @@
 var images = {};
+var urls = {
+  film: 'https://vimeo.com/clintonodonnell',
+  music_video: 'https://www.youtube.com/channel/UCWtgTAmRqFw6OtwBV-la1rQ',
+  music: 'https://soundcloud.com/c1inton'
+};
 
 $(document).ready(function() { init(); });
 $(window).resize(updateTargets);
@@ -6,6 +11,8 @@ $(window).resize(updateTargets);
 function setBg(element, url) {
   element.css('background-image', 'url(' + url + ')');
 };
+
+
 
 function init() {
   images = {
@@ -30,12 +37,29 @@ function init() {
     setBg(mymage.element.find('.bg'), mymage.url);
   }
   updateTargets();
+
+  var elements = $('img');
+  for (element in elements) {
+    var el = elements[element];
+    $(el).click(function(e) {
+      var myEl = e.target;
+      var parent = e.target.parentElement
+      var id = e.target.parentElement.id
+      if (!myEl.classList.contains('hover')) {
+        // maybe trigger hover state
+        return;
+      }
+      if (id && urls[id]) {
+        window.open(urls[id]);
+      }
+    });
+  }
 }
 
 function updateTargets() {
   for (imageKey in images) {
     var image = images[imageKey];
-    var newScale = Math.min($(window).width() / 1000, .4);
+    var newScale = Math.min(Math.min($(window).height(), $(window).width()*1.5) / 1500, .4);
     image.element.css('transform', 'scale(' + newScale + ') ' + image.transform);
   }
 }
