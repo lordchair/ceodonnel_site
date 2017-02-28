@@ -19,7 +19,7 @@ function init() {
     desk: {
       url: 'assets/desk.png',
       element: $('#desk'),
-      transform: 'translate(-10%, 10%)'
+      transform: 'translate(-10%, 20%)'
     },
     hand: {
       url: 'assets/hand.png',
