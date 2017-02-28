@@ -20,9 +20,11 @@ body {
   position: absolute;
   top: 0;
   right: 0;
+  padding: 16px;
   padding: 1rem;
   text-transform: capitalize;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
   font-size: 1rem;
   font-weight: 300;
   font-style: italic;
@@ -43,7 +45,8 @@ body {
 #desk {
   width: 1684px;
   height:1019px;
-  transform-origin: bottom left;
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
   left: -1%;
   bottom: 6%;
   z-index: 103;
@@ -76,7 +79,8 @@ body {
 #staircase {
   width: 2014px;
   height:946px;
-  transform-origin: top right;
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
   top: 22vw;
   right: 0;
   z-index: 101;
@@ -122,9 +126,15 @@ body {
   right: 0;
   width: 100%;
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .bg {
