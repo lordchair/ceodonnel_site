@@ -41,14 +41,14 @@ function init() {
   var elements = $('img');
   for (element in elements) {
     var el = elements[element];
-    $(el).click(function(e) {
+    $(el).on('click touch', function(e) {
       var myEl = e.target;
       var parent = e.target.parentElement
       var id = e.target.parentElement.id
-      if (!myEl.classList.contains('hover')) {
-        // maybe trigger hover state
-        return;
-      }
+      // if (!myEl.classList.contains('hover')) {
+      //   // maybe trigger hover state
+      //   return;
+      // }
       if (id && urls[id]) {
         window.open(urls[id]);
       }
