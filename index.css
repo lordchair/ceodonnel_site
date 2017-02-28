@@ -60,6 +60,7 @@ body {
 }
 
 #hand {
+  position: relative;
   width: 1346px;
   height:681px;
   z-index: 102;
