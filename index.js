@@ -45,6 +45,7 @@ function init() {
       var myEl = e.target;
       var parent = e.target.parentElement
       var id = e.target.parentElement.id
+      var id = id || $(myEl).parents('.scene').children()[0].id;
       // if (!myEl.classList.contains('hover')) {
       //   // maybe trigger hover state
       //   return;
