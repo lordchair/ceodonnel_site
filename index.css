@@ -115,11 +115,11 @@ body {
   /*object-fit: cover;*/
 }
 
-.gif_container:hover .standard {
+.gif_container.isHover .standard {
   display: none;
 }
 
-.gif_container:hover .hover {
+.gif_container.isHover .hover {
   display: block;
 }
 

@@ -12,7 +12,13 @@ function setBg(element, url) {
   element.css('background-image', 'url(' + url + ')');
 };
 
-
+function updateTargets() {
+  for (imageKey in images) {
+    var image = images[imageKey];
+    var newScale = Math.min(Math.min($(window).height(), $(window).width()*1.5) / 1500, .4);
+    image.element.css('transform', 'scale(' + newScale + ') ' + image.transform);
+  }
+}
 
 function init() {
   images = {
@@ -38,22 +44,22 @@ function init() {
   }
   updateTargets();
 
-  $('.gif.standard').on('click touch', function(e) {
-    $(e.target.parent).trigger('mouseenter');
+  $('.gif_container').on('mouseenter', function(e) {
+    $(e.target.parentElement.parentElement).addClass('isHover');
+  });
+  $('.gif_container').on('mouseleave', function(e) {
+    $(e.target.parentElement.parentElement).removeClass('isHover');
   });
 
-  $('.gif.hover').on('click touch', function(e) {
-    var id = e.target.parentElement.id;
+  $('.gif.standard').on('click touch', function(e) {
+    $(e.target.parentElement.parentElement).trigger('mouseenter');
+  });
+
+  $('.gif_container').each(function() {
+    var me = $(this);
+    var id = me.attr('id');
     if (id && urls[id]) {
-      window.open(urls[id]);
+      me.find('a').last().attr('href', urls[id]);
     }
   });
-}
-
-function updateTargets() {
-  for (imageKey in images) {
-    var image = images[imageKey];
-    var newScale = Math.min(Math.min($(window).height(), $(window).width()*1.5) / 1500, .4);
-    image.element.css('transform', 'scale(' + newScale + ') ' + image.transform);
-  }
 }
