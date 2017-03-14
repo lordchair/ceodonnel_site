@@ -16,3 +16,7 @@ This time around I requested 3 rendered versions of the site: one wide, one squa
 
 ### Third Pass
 I realized that this would only work well if I could break out of the pre-rendered scene. I requested individual renders of each object and their shadows which I combined with imagemagick into 3 pngs with transparent shadows. I then picked 4 key points for the scene (pageWidth/pageHeight/image1X/image1Y/image2X/image2Y/image3X/image3Y) and solved the system of equations to find how I would need to position the three objects so that they would work for any reasonable aspect ratio. With that done, I just needed to polish things up. I used imagemagick to create animated gifs out of the video files to reduce bandwidth and CPU use, and I modified how I was handling user interaction so that the hover effects would work by double tapping on mobile. 
+
+Check out dat responsiveness
+
+![responsive_demo](https://raw.githubusercontent.com/lordchair/ceodonnell_site/master/assets/resize_demo.gif)
